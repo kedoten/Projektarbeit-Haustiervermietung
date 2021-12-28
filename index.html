@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haustierverleih</title>
+
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+    <!-- UIkit JS -->
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/js/uikit-icons.min.js"></script>
+</head>
+
+<body>
+    <!-- Navigation oben -->
+    <nav style="position:fixed; z-index: 100; width: 100%; height: 10vh;" class="uk-navbar-container" uk-navbar>
+        <div class="uk-navbar-left">
+            <img data-src="images/logo1.png" alt="" uk-img style="margin-left:10px">
+            <ul class="uk-navbar-nav uk-text-bold">
+                <li>
+                    <a href="index.html">Home</a>
+                </li>
+                <li style="margin-left:50px">
+                    <a href="tiere.html">Tiere</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav ">
+                            <li><a href="#">Hunde</a></li>
+                            <li><a href="#">Katzen</a></li>
+                            <li><a href="#">...</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="tierheime.html">Tierheime</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="#">Partner werden</a></li>
+                            <li><a href="#">Kontakt</a></li>
+                            <li><a href="#">...</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="ueberUns.html">Über uns</a>
+                </li>
+             </ul>
+        </div>
+
+        <div class="uk-navbar-right uk-text-bold" style="margin-right:50px">
+            <ul class="uk-navbar-nav">
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Background + Text -->
+    <div style="z-index: 99; width: 100%; height: 90vh; background-image: url(images/bg1.png);" class="uk-background-fixed uk-background-top-center uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-left uk-flex-middle">
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
+            eirmod tempor<br> invidunt ut labore et dolore magna aliquyam erat, sed diam 
+            voluptua. At vero eos et accusam <br>et justo duo dolores et ea rebum. Stet 
+            clita kasd gubergren, no sea takimata sanctus est Lorem <br>ipsum dolor sit 
+            amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam 
+            nonumy <br>eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+            sed diam voluptua. At vero <br>eos et accusam et justo duo dolores et ea rebum. 
+            Stet clita kasd gubergren, no sea takimata sanctus <br>est Lorem ipsum dolor sit amet.
+        </p>
+    </div>
+
+    <!-- 1 Text-Teil -->
+    <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+        None
+    </div>
+
+    <!-- Footer -->
+    <div style="width: 100%; height: 20vh;" class=" uk-background-primary uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+        Primary
+    </div>
+</body>
+</html>
