@@ -1,7 +1,6 @@
 {
   "name": "projektarbeit-haustiervermietung",
   "version": "1.0.0",
-  "description": "",
   "main": "database.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,5 +18,6 @@
   "homepage": "https://github.com/kedoten/Projektarbeit-Haustiervermietung#readme",
   "dependencies": {
     "pg": "^8.7.1"
-  }
+  },
+  "description": ""
 }
