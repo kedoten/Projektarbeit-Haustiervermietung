@@ -1,0 +1,23 @@
+{
+  "name": "projektarbeit-haustiervermietung",
+  "version": "1.0.0",
+  "description": "",
+  "main": "database.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kedoten/Projektarbeit-Haustiervermietung.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kedoten/Projektarbeit-Haustiervermietung/issues"
+  },
+  "homepage": "https://github.com/kedoten/Projektarbeit-Haustiervermietung#readme",
+  "dependencies": {
+    "pg": "^8.7.1"
+  }
+}

@@ -13,3 +13,11 @@ Home:
         - Support 
         - Verlinkung Navigation
  
+
+
+
+
+ PS:
+ nodejs installieren
+ npm init -y
+ npm install pg
