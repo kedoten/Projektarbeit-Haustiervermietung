@@ -19,7 +19,7 @@ Home:
 
  PS:
  nodejs installieren
- 
+
  cmd in vsc (nicht powershell)
  npm init -y
  npm install pg
