@@ -59,10 +59,12 @@ app.use( express.static("public"))
 *   app.post ->
 */  
 
+// index
 app.get('/', (req, res) => {
     res.render('index.ejs')
 })
 
+// Login
 app.get('/login', (req, res) => {
     res.render('Login/login.ejs')
 })
@@ -96,6 +98,7 @@ app.post('/register', async (req, res) => {
    console.log(users)
 })
 
+// Tiere
 app.get('/tiere', (req, res) => {
     res.render('Tiere/tiere.ejs')
 })
@@ -114,6 +117,32 @@ app.get('/tiere/katze', (req, res) => {
 
 app.get('/tiere/schildkroete', (req, res) => {
     res.render('Tiere/schildkroete.ejs')
+})
+
+app.get('/tiere/sonstige', (req, res) => {
+    res.render('Tiere/sonstige.ejs')
+})
+
+app.get('/tiere/vogel', (req, res) => {
+    res.render('Tiere/vogel.ejs')
+})
+
+//Tierheim
+app.get('/tierheim', (req, res) => {
+    res.render('Tierheim/tierheime.ejs')
+})
+
+app.get('/tierheim/kontakt', (req, res) => {
+    res.render('Tierheim/kontakt.ejs')
+})
+
+app.get('/tierheim/partner_werden', (req, res) => {
+    res.render('Tierheim/partner_werden.ejs')
+})
+
+//Über uns
+app.get('/ueberUns', (req, res) => {
+    res.render('UeberUns/ueberUns.ejs')
 })
 
 //Website über (Powershell): npm run devStart       (URL): localhost:3000       erreichbar
