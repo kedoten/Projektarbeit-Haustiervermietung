@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/login', (req, res) => {
-    res.render('login.ejs')
+    res.render('Login/login.ejs')
 })
 
 app.post('/login', passport.authenticate('local', {
@@ -74,7 +74,7 @@ app.post('/login', passport.authenticate('local', {
 }))
 
 app.get('/register', (req, res) => {
-    res.render('register.ejs')
+    res.render('Login/register.ejs')
 })
 
 app.post('/register', async (req, res) => {
@@ -97,11 +97,23 @@ app.post('/register', async (req, res) => {
 })
 
 app.get('/tiere', (req, res) => {
-    res.render('tiere.ejs')
+    res.render('Tiere/tiere.ejs')
 })
 
 app.get('/tiere/hamster', (req, res) => {
-    res.render('hamster.ejs')
+    res.render('Tiere/hamster.ejs')
+})
+
+app.get('/tiere/hund', (req, res) => {
+    res.render('Tiere/hund.ejs')
+})
+
+app.get('/tiere/katze', (req, res) => {
+    res.render('Tiere/katze.ejs')
+})
+
+app.get('/tiere/schildkroete', (req, res) => {
+    res.render('Tiere/schildkroete.ejs')
 })
 
 //Website über (Powershell): npm run devStart       (URL): localhost:3000       erreichbar
