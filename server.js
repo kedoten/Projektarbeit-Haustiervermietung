@@ -96,5 +96,13 @@ app.post('/register', async (req, res) => {
    console.log(users)
 })
 
+app.get('/tiere', (req, res) => {
+    res.render('tiere.ejs')
+})
+
+app.get('/tiere/hamster', (req, res) => {
+    res.render('hamster.ejs')
+})
+
 //Website über (Powershell): npm run devStart       (URL): localhost:3000       erreichbar
 app.listen(3000)

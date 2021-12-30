@@ -22,47 +22,48 @@
         <div class="uk-navbar-left">
             <ul class="uk-thumbnav">
                 <li class="uk-active"><a href=""><img src="" alt=""></a></li>
-                <li><a href="index.html"><img src="../images/logo1.png" alt=""></a></li>
+                <li><a href="index.ejs"><img src="../images/logo1.png" alt=""></a></li>
             </ul>
             <ul class="uk-navbar-nav uk-text-bold">
                 <li style="margin-left:650px">
-                    <a href="Tiere/tiere.html">Tiere</a>
+                    <a href="tiere.ejs">Tiere</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav ">
-                            <li><a href="#">Hunde</a></li>
-                            <li><a href="#">Katzen</a></li>
-                            <li><a href="#">Hamster</a></li>
-                            <li><a href="#">Vögel</a></li>
-                            <li><a href="#">Schildkröten</a></li>
-                            <li><a href="#">Sonstiges</a></li>
+                            <li><a href="../views/Tiere/hund.ejs">Hunde</a></li>
+                            <li><a href="../Tiere/katze.ejs">Katzen</a></li>
+                            <li><a href="../Tiere/hamster.ejs">Hamster</a></li>
+                            <li><a href="../Tiere/vogel.ejs">Vögel</a></li>
+                            <li><a href="../Tiere/schildkroete.ejs">Schildkröten</a></li>
+                            <li><a href="../Tiere/sonstige.ejs">Sonstiges</a></li>
                         </ul>
                     </div>
                 </li>
                 <li style="margin-left:50px">
-                    <a href="Tierheim/tierheime.html">Tierheime</a>
+                    <a href="../Tierheim/tierheime.ejs">Tierheime</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="../Tierheim/partner_werden.html">Partner werden</a></li>
-                            <li><a href="../Tierheim/kontakt.html">Kontakt</a></li>
+                            <li><a href="../Tierheim/partner_werden.ejs">Partner werden</a></li>
+                            <li><a href="../Tierheim/kontakt.ejs">Kontakt</a></li>
                         </ul>
                     </div>
                 </li>
                 <li style="margin-left:50px">
-                    <a href="UeberUns/ueberUns.html">Über uns</a>
+                    <a href="../UeberUns/ueberUns.ejs">Über uns</a>
                 </li>
              </ul>
         </div>
 
         <div class="uk-navbar-right uk-text-bold" style="margin-right:50px">
             <ul class="uk-navbar-nav">
-                <li><a href="Login/login.html">Login</a></li>
+                <li><a href="../Login/login.ejs">Login</a></li>
             </ul>
         </div>
     </nav>
 
     <!-- Background + Text -->
     <div style="width: 100%; height: 90vh; background-image: url(images/bg1.png);" class="uk-background-fixed uk-background-top-center uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-left uk-flex-middle">
-        <p class="uk-heading-medium" style="position: fixed;">Haustiervermietung</p>
+        <p class="uk-heading-small" style="position: fixed; margin-top: -5%;"><br>Sie wollen beim ersten Date <br> mit einem Haustier beeindrucken, <br> aber haben keins?</p>
+        <p class="uk-heading-small" style="position: fixed;"> <br><br><br><br><br>Dann mieten Sie sich bei uns ein Haustier!</p>
     </div>
 
     <!-- 1 Text-Teil -->
@@ -72,7 +73,10 @@
 
     <!-- Bewertungen -->
     <div id="Bewertungen" style="width: 100%; height: 60vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <div style="width: 50%;  margin-top: -15%; margin-left: 5%;">
+        
+        <h1 style="margin-top: -20%;">Bewertungen:</h1>
+
+        <div style="width: 50%;  margin-top: 10%; margin-left: -10%;">
             <article class="uk-comment">
                 <header class="uk-comment-header">
                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
@@ -85,17 +89,14 @@
                     </div>
                 </header>
                 <div class="uk-comment-body">
-                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy 
-                        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam 
-                        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet 
-                        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
                 </div>
             </article>
         </div>
 
         <a class="uk-button" href="" uk-scroll  uk-totop style="margin-top: -25%;"></a>
 
-        <div style="width: 50%; margin-top: 15%; margin-left: 5%;">
+        <div style="width: 50%; margin-top: -10%; margin-left: 5%;">
             <article class="uk-comment">
                 <header class="uk-comment-header">
                     <div class="uk-grid-medium uk-flex-middle" uk-grid>
