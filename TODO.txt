@@ -13,7 +13,7 @@ Home:
         - Support 
         - Verlinkung Navigation
  
-
+SESSION_SECRET auf random string setzen zur sicherheit
 
 
 

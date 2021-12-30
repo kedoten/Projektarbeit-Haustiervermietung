@@ -16,10 +16,24 @@ client.query(`Select * from users`, (err,res)=>{
     }
     client.end;
 } )*/
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config()
+}
+
 
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+
+const initializePassport = require('./Login/passport-config')
+initializePassport(
+    passport, 
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
+)
 
 //Hier mit DB Connection ersetzen
 const users = []
@@ -28,6 +42,15 @@ const users = []
 //Welche Dateien für die Ansicht verwendet werden  -  Muss auf die html Datei umgeschrieben werden 
 app.set('view-engine', 'ejs')
 app.use(express.urlencoded({ extended: false}))
+app.use(flash())
+app.use(session( {
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false
+}))
+app.use(passport.initialize())
+app.use(passport.session())
+
 
 /*  app.get -> Seite durch entsprechende URL aurufbar -> Welche Datei für die Ansicht benutzt wird
 *   app.post ->
@@ -41,9 +64,11 @@ app.get('/login', (req, res) => {
     res.render('login.ejs')
 })
 
-app.post('/login', (req, res) => {
-   
-})
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
 
 app.get('/register', (req, res) => {
     res.render('register.ejs')
@@ -52,6 +77,7 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
    try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
+    //Hier DB Push einfügen
     users.push({
         id: Date.now().toString(),
         lastname: req.body.lastname,
