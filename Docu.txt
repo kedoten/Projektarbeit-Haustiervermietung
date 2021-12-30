@@ -1,0 +1,15 @@
+Package installieren
+ nodejs installieren (Installer aus Web)
+
+ cmd in vsc (nicht powershell)
+ npm init -y
+ npm install pg
+
+ EJS installieren (Expansions für Views)
+    (powershell): npm i express ejs
+ 
+Nodemon & Dotenv installieren (Nodemon: Server startet auto neu beim speichern | Dotenv: Umgebungsvariabeln)
+    (powershell): npm i --save-dev nodemon dotenv
+
+ bcrypt installieren (Zum verschlüsseln von passwords und vergleich von hashed passwords)
+    (powershell): npm i bcrypt
