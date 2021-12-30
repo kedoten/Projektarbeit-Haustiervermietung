@@ -51,6 +51,9 @@ app.use(session( {
 app.use(passport.initialize())
 app.use(passport.session())
 
+//Bilder
+app.use( express.static("public"))
+
 
 /*  app.get -> Seite durch entsprechende URL aurufbar -> Welche Datei für die Ansicht benutzt wird
 *   app.post ->
