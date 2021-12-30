@@ -29,12 +29,12 @@
                     <a href="../Tiere/tiere.html">Tiere</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav ">
-                            <li><a href="#">Hunde</a></li>
-                            <li><a href="#">Katzen</a></li>
-                            <li><a href="#">Hamster</a></li>
-                            <li><a href="#">Vögel</a></li>
-                            <li><a href="#">Schildkröten</a></li>
-                            <li><a href="#">Sonstiges</a></li>
+                            <li><a href="../Tiere/hund.html">Hunde</a></li>
+                            <li><a href="../Tiere/katze.html">Katzen</a></li>
+                            <li><a href="../Tiere/hamster.html">Hamster</a></li>
+                            <li><a href="../Tiere/vogel.html">Vögel</a></li>
+                            <li><a href="../Tiere/schildkroete.html">Schildkröten</a></li>
+                            <li><a href="../Tiere/sonstige.html">Sonstiges</a></li>
                         </ul>
                     </div>
                 </li>
@@ -42,8 +42,8 @@
                     <a href="../Tierheim/tierheime.html">Tierheime</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li><a href="../partner_werden.html">Partner werden</a></li>
-                            <li><a href="../kontakt.html">Kontakt</a></li>
+                            <li><a href="partner_werden.html">Partner werden</a></li>
+                            <li><a href="kontakt.html">Kontakt</a></li>
                         </ul>
                     </div>
                 </li>
@@ -62,7 +62,39 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <h1>Kontakt</h1>
+        <form>
+            <fieldset class="uk-fieldset" style="width: 500px;">
+        
+                <legend class="uk-legend">Kontaktformular</legend>
+        
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="Name">
+                </div>
+
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" placeholder="E-Mail">
+                </div>
+        
+                <div class="uk-margin">
+                    <select class="uk-select">
+                        <option>Kontaktgrund</option>
+                        <option>Porblem</option>
+                    </select>
+                </div>
+        
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" rows="7" placeholder="Text"></textarea>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div style="width: 100%; height: 20vh;" class=" uk-background-secondary uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+        <span uk-icon="instagram"></span>
+        <span uk-icon="facebook"></span>
+        <span uk-icon="twitter"></span>
+        <span uk-icon="youtube"></span>
     </div>
 </body>
 </html>
