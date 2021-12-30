@@ -16,3 +16,6 @@ bcrypt installieren (Zum verschlüsseln von passwords und vergleich von hashed p
 
 Passport, Session & Flash installieren (Passport erlaubt verschiedene Login Möglichkeiten [Benutzername, Google,..]; Session to store and persist Users across diffrent pages; Flash to display messages for if we fail to login)
    (powershell): npm i passport passport-local express-session express-flash
+
+.env-Datei hinzufügen
+    Inhalt: SESSION_SECRET=secret
