@@ -38,3 +38,5 @@ https://getuikit.com/docs/form
 
 - für Impressum 
 https://getuikit.com/docs/breadcrumb
+
+- navigation eine li-Zeile entfernen bei Bild 
