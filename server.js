@@ -27,6 +27,7 @@ const bcrypt = require('bcrypt')
 const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
+const methodOverride = require('method-override')
 
 const initializePassport = require('./Login/passport-config')
 initializePassport(
@@ -50,6 +51,7 @@ app.use(session( {
 }))
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(methodOverride('_method'))
 
 //Bilder
 app.use( express.static("public"))
@@ -65,21 +67,21 @@ app.get('/', (req, res) => {
 })
 
 // Login
-app.get('/login', (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('Login/login.ejs')
 })
 
-app.post('/login', passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 }))
 
-app.get('/register', (req, res) => {
+app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('Login/register.ejs')
 })
 
-app.post('/register', async (req, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res) => {
    try {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
     //Hier DB Push einfügen
@@ -144,6 +146,38 @@ app.get('/tierheim/partner_werden', (req, res) => {
 app.get('/ueberUns', (req, res) => {
     res.render('UeberUns/ueberUns.ejs')
 })
+
+
+
+//Logout
+app.delete('/logout', (req,res) => {
+    req.logOut()
+    req.redirect('/login')
+})
+
+
+//wenn nicht angemeldet wird man zum Login verwiesen
+function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next()
+    }
+
+    return res.redirect('/login')
+}
+
+
+//wenn man eingelogt ist wird man statdessen zum Home weiter geleitet 
+function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+       return res.redirect('/')
+    }
+
+    return next()
+}
+
+
+
+
 
 //Website über (Powershell): npm run devStart       (URL): localhost:3000       erreichbar
 app.listen(3000)

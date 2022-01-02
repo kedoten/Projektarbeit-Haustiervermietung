@@ -19,3 +19,6 @@ Passport, Session & Flash installieren (Passport erlaubt verschiedene Login Mög
 
 .env-Datei hinzufügen
     Inhalt: SESSION_SECRET=secret
+
+Method Override installieren (Html Erweiterung -> Nutzung von app.delete für Logout)
+    (powershell): npm i method-override
