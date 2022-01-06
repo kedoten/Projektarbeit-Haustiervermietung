@@ -1,21 +1,33 @@
-/*const {Client} = require('pg')
+const {Client} = require('pg')
 
 const client = new Client({
     host: "localhost",
-    user: "postgres",
+    user: "user",
     port: 5432,
-    password: "rootUser",
-    database: "postgres"
+    password: "user",
+    database: "Haustiervermietung"
 })
 
-client.query(`Select * from users`, (err,res)=>{
+//Connection Test
+client.connect()
+.then(() => console.log("Connected successfuly"))
+//.then(() => client.query('select * from public.Tiere'))
+//.then(results => console.table(results.rows))
+.catch(e => console.log(e))
+.finally(() => client.end)
+
+//Ausgabe user table
+client.query(`Select * from user`, (err,res)=>{
     if(!err){
         console.log(res.rows);
     } else {
         console.log(err.message);
     }
     client.end;
-} )*/
+} )
+
+
+
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
@@ -29,7 +41,8 @@ const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
 
-const initializePassport = require('./Login/passport-config')
+const initializePassport = require('./Login/passport-config');
+const { user } = require('pg/lib/defaults');
 initializePassport(
     passport, 
     email => users.find(user => user.email === email),
