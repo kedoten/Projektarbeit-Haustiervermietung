@@ -165,7 +165,7 @@ app.get('/ueberUns', (req, res) => {
 //Logout
 app.delete('/logout', (req,res) => {
     req.logOut()
-    req.redirect('/login')
+    res.redirect('/login')
 })
 
 
@@ -175,7 +175,7 @@ function checkAuthenticated(req, res, next) {
         return next()
     }
 
-    return res.redirect('/login')
+    res.redirect('/login')
 }
 
 
@@ -185,7 +185,7 @@ function checkNotAuthenticated(req, res, next) {
        return res.redirect('/')
     }
 
-    return next()
+    next()
 }
 
 

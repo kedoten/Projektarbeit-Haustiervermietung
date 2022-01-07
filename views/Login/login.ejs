@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -50,7 +51,7 @@
                 <li style="margin-left:50px">
                     <a href="/ueberUns">Über uns</a>
                 </li>
-             </ul>
+            </ul>
         </div>
 
         <div class="uk-navbar-right uk-text-bold" style="margin-right:50px">
@@ -61,11 +62,14 @@
     </nav>
 
     <!-- 1 Text-Teil -->
-    <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <% if(message.error) { %>
-            <%= messages.error %>
-        <% } %>
-        <form action="/login" method="post">  
+    <div style="width: 100%; height: 80vh;"
+        class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+        <form action="/login" method="post">
+            <div>
+                <% if(messages.error) { %>
+                    <%= messages.error %>
+                        <% } %>
+            </div>
             <div class="uk-margin">
                 <div class="uk-inline">
                     <span class="uk-form-icon" uk-icon="icon: mail"></span>
@@ -81,22 +85,23 @@
             </div>
 
             <p uk-margin>
-                <a class="uk-button uk-button-default" href="">Login</a>
+                <button class="uk-button uk-button-default" type="submit">Login</button>
             </p>
 
             <p uk-margin>
                 <a class="uk-button uk-button-default" href="/register">Jetzt Registrieren!</a>
             </p>
-        
         </form>
     </div>
 
     <!-- Footer -->
-    <div style="width: 100%; height: 20vh;" class=" uk-background-secondary uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+    <div style="width: 100%; height: 20vh;"
+        class=" uk-background-secondary uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
         <span uk-icon="instagram"></span>
         <span uk-icon="facebook"></span>
         <span uk-icon="twitter"></span>
         <span uk-icon="youtube"></span>
     </div>
 </body>
+
 </html>
