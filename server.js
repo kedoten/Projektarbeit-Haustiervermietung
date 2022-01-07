@@ -1,4 +1,5 @@
-const {Client} = require('pg')
+//Database Connection Config
+const { Client } = require('pg')
 
 const client = new Client({
     host: "localhost",
@@ -8,30 +9,20 @@ const client = new Client({
     database: "Haustiervermietung"
 })
 
-//Connection Test
+const users = []
+
+//Databasen connecten + User Ausgeben für Login 
 client.connect()
-.then(() => console.log("Connected successfuly"))
-.then(() => client.query('select * from user'))
-.then(results => console.table(results.rows))
-.catch(e => console.log(e))
-.finally(() => client.end)
-
-//Ausgabe user table
-/*client.query(`Select * from user`, (err,res)=>{
-    if(!err){
-        console.log(res.rows);
-    } else {
-        console.log(err.message);
-    }
-    client.end;
-} )*/
-
+    .then(() => console.log("Connected successfuly"))
+    .then(() => client.query("Select * from users"))
+    .then(result => result.rows.forEach(element => users.push(element)))
+    .then(console.log(users))
+    .catch(e => console.log(e))
 
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
-
 
 const express = require('express')
 const app = express()
@@ -44,20 +35,28 @@ const methodOverride = require('method-override')
 const initializePassport = require('./Login/passport-config');
 const { user } = require('pg/lib/defaults');
 initializePassport(
-    passport, 
+    passport,
     email => users.find(user => user.email === email),
     id => users.find(user => user.id === id)
 )
 
-//Hier mit DB Connection ersetzen
+/*Hier mit DB Connection ersetzen
 const users = []
+        users.push({
+            id: Date.now().toString(),
+            lastname: req.body.lastname,
+            firstname: req.body.firstname,
+            email: req.body.email,
+            birthdate: req.body.birthdate,
+            password: hashedPassword
+        })*/
 
 
 //Welche Dateien für die Ansicht verwendet werden  -  Muss auf die html Datei umgeschrieben werden 
 app.set('view-engine', 'ejs')
-app.use(express.urlencoded({ extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(flash())
-app.use(session( {
+app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
@@ -67,12 +66,12 @@ app.use(passport.session())
 app.use(methodOverride('_method'))
 
 //Bilder
-app.use( express.static("public"))
+app.use(express.static("public"))
 
 
 /*  app.get -> Seite durch entsprechende URL aurufbar -> Welche Datei für die Ansicht benutzt wird
 *   app.post ->
-*/  
+*/
 
 // index
 app.get('/', (req, res) => {
@@ -80,37 +79,34 @@ app.get('/', (req, res) => {
 })
 
 // Login
-app.get('/login', checkNotAuthenticated, (req, res) => {
+app.get('/login', (req, res) => {
     res.render('Login/login.ejs')
 })
 
-app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+app.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 }))
 
-app.get('/register', checkNotAuthenticated, (req, res) => {
+app.get('/register', (req, res) => {
     res.render('Login/register.ejs')
 })
 
-app.post('/register', checkNotAuthenticated, async (req, res) => {
-   try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10)
-    //Hier DB Push einfügen
-    users.push({
-        id: Date.now().toString(),
-        lastname: req.body.lastname,
-        firstname: req.body.firstname,
-        email: req.body.email,
-        birthdate: req.body.birthdate,
-        password: hashedPassword
-    })
-    res.redirect('/login')
-   } catch {
-    res.redirect('/register')
-   }
-   console.log(users)
+app.post('/register', async (req, res) => {
+    //Password wird nun gehashed und in der Datenbank gespeichert 
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10)
+        client.query("insert into users(lastname,firstname,email,birthdate,passwort) values($1, $2, $3, $4, $5)",
+            [req.body.lastname, req.body.firstname, req.body.email, req.body.birthdate, hashedPassword])
+            .then(() => client.query("Select * from users"))
+            .then(result => console.log(result.rows))             
+            users.push({ id: Date.now().toString(), lastname: req.body.lastname, firstname: req.body.firstname, email: req.body.email, birthdate: req.body.birthdate, password:hashedPassword })
+        res.redirect('/login')
+    } catch {
+        res.redirect('/register')
+    }
+    //console.log(users)
 })
 
 // Tiere
@@ -163,7 +159,7 @@ app.get('/ueberUns', (req, res) => {
 
 
 //Logout
-app.delete('/logout', (req,res) => {
+app.delete('/logout', (req, res) => {
     req.logOut()
     res.redirect('/login')
 })
@@ -182,7 +178,7 @@ function checkAuthenticated(req, res, next) {
 //wenn man eingelogt ist wird man statdessen zum Home weiter geleitet 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-       return res.redirect('/')
+        return res.redirect('/')
     }
 
     next()
