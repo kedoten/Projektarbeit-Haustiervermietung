@@ -11,20 +11,20 @@ const client = new Client({
 //Connection Test
 client.connect()
 .then(() => console.log("Connected successfuly"))
-//.then(() => client.query('select * from public.Tiere'))
-//.then(results => console.table(results.rows))
+.then(() => client.query('select * from user'))
+.then(results => console.table(results.rows))
 .catch(e => console.log(e))
 .finally(() => client.end)
 
 //Ausgabe user table
-client.query(`Select * from user`, (err,res)=>{
+/*client.query(`Select * from user`, (err,res)=>{
     if(!err){
         console.log(res.rows);
     } else {
         console.log(err.message);
     }
     client.end;
-} )
+} )*/
 
 
 
