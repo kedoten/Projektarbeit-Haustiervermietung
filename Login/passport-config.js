@@ -1,6 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy
 const bcrypt = require('bcrypt')
 
+
+//Login Funktion Email- und Passwortvergleich mit entsprechender Fehlermeldungsausgabe 
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const user = getUserByEmail(email)
@@ -9,7 +11,7 @@ function initialize(passport, getUserByEmail, getUserById) {
         }
 
         try{
-            if(await bcrypt.compare(password, user.passwort) ) {
+            if(await bcrypt.compare(password, user.password) ) {
                 return done(null, user)
             } else {
                 return done(null, false, { message: 'password incorrect' })
@@ -20,6 +22,7 @@ function initialize(passport, getUserByEmail, getUserById) {
 
     }
 
+    //Benutzer einloggen
     passport.use(new LocalStrategy({ usernameField: 'email'}, authenticateUser))
     passport.serializeUser((user, done) => done(null, user.id))
     passport.deserializeUser((id, done) => {

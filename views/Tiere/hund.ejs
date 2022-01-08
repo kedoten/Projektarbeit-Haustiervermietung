@@ -62,7 +62,22 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <h1>Hund</h1>
+        <h1>Hund</h1>      
+        <div>
+            <% if (tiere.length > 0) {%>
+                <% tiere.forEach(tier => { %>
+
+                    <p class="tid"> <%= tier.tid %>  </p>
+                    <p class="tname"> <%= tier.tname %>  </p>
+                    <p class="talter"> <%= tier.talter %>  </p>
+                    <p class="rasse"> <%= tier.rasse %>  </p>
+
+                <% }) %>
+                <% }else { %>
+
+                    <p> Es gibt keine tiere</p>
+                <% } %>
+        </div>
     </div>
 
     <!-- Footer -->

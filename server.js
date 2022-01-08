@@ -10,13 +10,13 @@ const client = new Client({
 })
 
 const users = []
+const tiere = []
 
 //Databasen connecten + User Ausgeben für Login 
 client.connect()
     .then(() => console.log("Connected successfuly"))
     .then(() => client.query("Select * from users"))
     .then(result => result.rows.forEach(element => users.push(element)))
-    .then(console.log(users))
     .catch(e => console.log(e))
 
 
@@ -54,6 +54,7 @@ const users = []
 
 //Welche Dateien für die Ansicht verwendet werden  -  Muss auf die html Datei umgeschrieben werden 
 app.set('view-engine', 'ejs')
+
 app.use(express.urlencoded({ extended: false }))
 app.use(flash())
 app.use(session({
@@ -69,8 +70,11 @@ app.use(methodOverride('_method'))
 app.use(express.static("public"))
 
 
-/*  app.get -> Seite durch entsprechende URL aurufbar -> Welche Datei für die Ansicht benutzt wird
-*   app.post ->
+/*  app.get     ->  Seite durch entsprechende URL aurufbar -> Welche Datei für die Ansicht benutzt wird
+*   app.post    ->  Funktion ausführen
+*   app.delete  ->  Aktuelle Sitzung "löschen" = logout button
+*   app.use     ->  Packages benutzen
+*   app.set     ->  ?Umgebungsvariabeln? setzen  
 */
 
 // index
@@ -79,7 +83,7 @@ app.get('/', (req, res) => {
 })
 
 // Login
-app.get('/login', (req, res) => {
+app.get('/login',checkNotAuthenticated, (req, res) => {
     res.render('Login/login.ejs')
 })
 
@@ -89,19 +93,19 @@ app.post('/login', passport.authenticate('local', {
     failureFlash: true
 }))
 
-app.get('/register', (req, res) => {
+app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('Login/register.ejs')
 })
 
 app.post('/register', async (req, res) => {
-    //Password wird nun gehashed und in der Datenbank gespeichert 
+    //Password wird nun gehashed und in der Datenbank gespeichert, Zusätzlich wird der erstellte User in ein 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
-        client.query("insert into users(lastname,firstname,email,birthdate,passwort) values($1, $2, $3, $4, $5)",
+        client.query("insert into users(lastname,firstname,email,birthdate,password) values($1, $2, $3, $4, $5)",
             [req.body.lastname, req.body.firstname, req.body.email, req.body.birthdate, hashedPassword])
+            .then(()=> users.length = 0)
             .then(() => client.query("Select * from users"))
-            .then(result => console.log(result.rows))             
-            users.push({ id: Date.now().toString(), lastname: req.body.lastname, firstname: req.body.firstname, email: req.body.email, birthdate: req.body.birthdate, password:hashedPassword })
+            .then(result => result.rows.forEach(element => users.push(element)))            
         res.redirect('/login')
     } catch {
         res.redirect('/register')
@@ -119,7 +123,13 @@ app.get('/tiere/hamster', (req, res) => {
 })
 
 app.get('/tiere/hund', (req, res) => {
-    res.render('Tiere/hund.ejs')
+    
+    tiere.length = 0
+    client.query("Select * from tiere")
+    .then(result => result.rows.forEach(element => tiere.push(element)))
+    .then(() => (console.table(tiere)))
+
+    .then(() => res.render('Tiere/hund.ejs', {tiere}))
 })
 
 app.get('/tiere/katze', (req, res) => {
