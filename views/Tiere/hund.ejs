@@ -61,8 +61,7 @@
     </nav>
 
     <!-- 1 Text-Teil -->
-    <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <h1>Hund</h1>      
+    <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">    
         <div>
             <% if (tiere.length > 0) {%>
                 <% tiere.forEach(tier => { %>
@@ -83,14 +82,14 @@
             <% if (tiere.length > 0) {%>
                 <% tiere.forEach(tier => { %>
 
-                    <div>
-                        <div class="uk-card uk-card-hover uk-card-body">
-                            <h3 class="uk-card-title"><%= tier.tid %></h3>
-                            <h3 class="uk-card-title"><%= tier.tname %></h3>
-                            <h3 class="uk-card-title"><%= tier.talter %></h3>
-                            <h3 class="uk-card-title"><%= tier.rasse %></h3>
-                            
-                        </div>
+                    <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+                        <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
+                            <div class="uk-card uk-card-hover uk-card-body">
+                                <h3 class="uk-card-title"><%= tier.tname %></h3>
+                                <h3 class="uk-card-title"><%= tier.talter %></h3>
+                                <h3 class="uk-card-title"><%= tier.rasse %></h3>                            
+                            </div>
+                        </div>    
                     </div>
 
                 <% }) %>
