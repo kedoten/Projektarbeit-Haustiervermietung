@@ -83,7 +83,7 @@ app.get('/', (req, res) => {
 })
 
 // Login
-app.get('/login',checkNotAuthenticated, (req, res) => {
+app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('Login/login.ejs')
 })
 
@@ -103,9 +103,9 @@ app.post('/register', async (req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         client.query("insert into users(lastname,firstname,email,birthdate,password) values($1, $2, $3, $4, $5)",
             [req.body.lastname, req.body.firstname, req.body.email, req.body.birthdate, hashedPassword])
-            .then(()=> users.length = 0)
+            .then(() => users.length = 0)
             .then(() => client.query("Select * from users"))
-            .then(result => result.rows.forEach(element => users.push(element)))            
+            .then(result => result.rows.forEach(element => users.push(element)))
         res.redirect('/login')
     } catch {
         res.redirect('/register')
@@ -123,13 +123,13 @@ app.get('/tiere/hamster', (req, res) => {
 })
 
 app.get('/tiere/hund', (req, res) => {
-    
+
     tiere.length = 0
     client.query("Select * from tiere")
-    .then(result => result.rows.forEach(element => tiere.push(element)))
-    .then(() => (console.table(tiere)))
+        .then(result => result.rows.forEach(element => tiere.push(element)))
+        .then(() => (console.table(tiere)))
 
-    .then(() => res.render('Tiere/hund.ejs', {tiere}))
+        .then(() => res.render('Tiere/hund.ejs', { tiere }))
 })
 
 app.get('/tiere/katze', (req, res) => {
@@ -175,7 +175,7 @@ app.delete('/logout', (req, res) => {
 })
 
 
-//wenn nicht angemeldet wird man zum Login verwiesen
+//wenn man nicht eingeloggt ist wird man zum login weitergeleitet 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
@@ -185,7 +185,7 @@ function checkAuthenticated(req, res, next) {
 }
 
 
-//wenn man eingelogt ist wird man statdessen zum Home weiter geleitet 
+//wenn nicht angemeldet wird man normal weitergeleitet
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return res.redirect('/')
@@ -194,7 +194,14 @@ function checkNotAuthenticated(req, res, next) {
     next()
 }
 
-
+//wenn man kein Admin ist wird man zur Start Seite weitergeleitet
+function checkAdmin(req, res, next) {
+     if (req.isAuthenticated() && req.user.id == 1) {
+          return next() 
+        } 
+        
+        res.redirect('/') 
+    }
 
 
 
