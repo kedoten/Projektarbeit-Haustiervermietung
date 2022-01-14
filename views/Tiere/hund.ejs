@@ -78,6 +78,27 @@
                     <p> Es gibt keine tiere</p>
                 <% } %>
         </div>
+
+        <div>
+            <% if (tiere.length > 0) {%>
+                <% tiere.forEach(tier => { %>
+
+                    <div>
+                        <div class="uk-card uk-card-hover uk-card-body">
+                            <h3 class="uk-card-title"><%= tier.tid %></h3>
+                            <h3 class="uk-card-title"><%= tier.tname %></h3>
+                            <h3 class="uk-card-title"><%= tier.talter %></h3>
+                            <h3 class="uk-card-title"><%= tier.rasse %></h3>
+                            
+                        </div>
+                    </div>
+
+                <% }) %>
+                <% }else { %>
+
+                    <p> Es gibt keine tiere</p>
+                <% } %>
+        </div>
     </div>
 
     <!-- Footer -->
