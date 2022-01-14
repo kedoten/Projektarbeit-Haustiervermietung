@@ -61,9 +61,25 @@
     </nav>
 
     <!-- 1 Text-Teil -->
-    <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <h1>Schildkröte</h1>
-    </div>
+    <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">    
+
+        <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+            <% if (tiere.length > 0) {%>
+                <% tiere.forEach(tier => { %>
+            <div class="uk-width-1-5 uk-text-left uk-width-expand@m">
+                <div class="uk-card uk-card-default uk-card-body "> <img data-src="images/schildkrote.png" alt="" uk-img width="50px" height="50px">
+                    <br class="tid"> Kennung: <%= tier.tid %> 
+                    <br class="tname"> Name: <%= tier.tname %>
+                    <br class="talter"> Alter: <%= tier.talter %>
+                    <br class="rasse"> Rasse: <%= tier.rasse %>
+                </div>
+             </div>
+            <% }) %>
+            <% }else { %>
+                <p> Es gibt keine tiere</p>
+            <% } %> 
+        </div>
+</div>
 
     <!-- Footer -->
     <div style="width: 100%; height: 20vh;" class=" uk-background-secondary uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">

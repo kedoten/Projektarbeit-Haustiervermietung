@@ -1,0 +1,32 @@
+1. Tabellen erstellen im Query Tool ( auch in der Reihenfolge )
+    create table users( id Serial Primary Key, email varchar(255), lastname varchar(255), passwort varchar(255), birthdate date, firstname varchar(255) )
+    create table tierheim (thid serial Primary Key, thname varchar(255), thadresse varchar(255) )
+    Create Table tiere (tid serial Primary Key, tname varchar(255), tierart varchar(255), rasse varchar(255), talter int , thid int , Foreign Key (thid) references tierheim(thid) )
+
+2. Server starten und als ersten den Admin registieren
+    firstname:      admin
+    lastname:       admin
+    birthdate:      01.01.1900
+    email:          service@admin
+    password:       admin
+
+3. Danach können andere Angaben eingeben werden:  (!AUßER USERS DAMIT PASSWÖRTER GEHASHED WERDEN)
+    insert into public."tierheim" ("thname", "thadresse")
+        values  ('Tierheim Dresden' , 'Zum Tierheim 10, 01157 Dresden'),
+                ('Katzenhilfe Hoyerswerda e.V.' , 'Industriegelände Straße A Nr. 29, 02977 Hoyerswerda'),
+	            ('Tierschutzverein Bautzen e. V.' , 'Bloaschütz 32 a, 02625 Bautzen'),
+ 	            ('Tierschutzverein Löbau-Zittau' , 'Bernstädter Str. 1, 02708 Rosenbach');
+
+    insert into public."tiere" ("tname", "tierart", "rasse", "talter" , "thid")
+        values  ('Hansi' , 'Schildkröte' , 'Dosenschildkröte' , 12 , 1),
+	            ('Fred'  , 'Hund' , 'deutscher Schäferhund' , 5 , 4 ),
+	            ('Luzi' , 'Katze' , 'britisch Kurzhaar' , 8 , 2 ),
+	            ('Georg' , 'Wellensittich' , 'Hansi-Bubi' , 3 , 4 ),
+	            ('Till' , 'Hund' , 'Beagle' , 5 , 3 ),
+	            ('Sandy' , 'Katze' , 'Perser' , 7 , 1 ),
+	            ('Frieda' , 'Hund' , 'deutsche Dogge' , 2 , 1 ),
+	            ('Dennis' , 'Hamster' , 'Goldhamster' , 1 , 3 ),
+	            ('Inge' , 'Schildkröte' , 'europäische Sumpfschildkröte' , 15 , 1 ),
+	            ('Frodo' , 'Katze' , 'Russisch Blau' , 4 , 2 ),
+	            ('Elly' , 'Hund' , 'Yorkshire Terrier' , 8 , 4 ),
+	            ('Franz' , 'Katze' , 'Perser' , 9 , 2 );

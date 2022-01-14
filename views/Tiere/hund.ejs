@@ -62,42 +62,23 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">    
-        <div>
-            <% if (tiere.length > 0) {%>
-                <% tiere.forEach(tier => { %>
 
-                    <p class="tid"> <%= tier.tid %>  </p>
-                    <p class="tname"> <%= tier.tname %>  </p>
-                    <p class="talter"> <%= tier.talter %>  </p>
-                    <p class="rasse"> <%= tier.rasse %>  </p>
-
-                <% }) %>
-                <% }else { %>
-
-                    <p> Es gibt keine tiere</p>
-                <% } %>
-        </div>
-
-        <div>
-            <% if (tiere.length > 0) {%>
-                <% tiere.forEach(tier => { %>
-
-                    <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-                        <div class="uk-child-width-1-3@s uk-grid-match" uk-grid>
-                            <div class="uk-card uk-card-hover uk-card-body">
-                                <h3 class="uk-card-title"><%= tier.tname %></h3>
-                                <h3 class="uk-card-title"><%= tier.talter %></h3>
-                                <h3 class="uk-card-title"><%= tier.rasse %></h3>                            
-                            </div>
-                        </div>    
+            <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+                <% if (tiere.length > 0) {%>
+                    <% tiere.forEach(tier => { %>
+                <div class="uk-width-1-5 uk-text-left uk-width-expand@m">
+                    <div class="uk-card uk-card-default uk-card-body "> <img data-src="images/hund.png" alt="" uk-img width="50px" height="50px">
+                        <br class="tid"> Kennung: <%= tier.tid %> 
+                        <br class="tname"> Name: <%= tier.tname %>
+                        <br class="talter"> Alter: <%= tier.talter %>
+                        <br class="rasse"> Rasse: <%= tier.rasse %>
                     </div>
-
+                 </div>
                 <% }) %>
                 <% }else { %>
-
                     <p> Es gibt keine tiere</p>
-                <% } %>
-        </div>
+                <% } %> 
+            </div>
     </div>
 
     <!-- Footer -->

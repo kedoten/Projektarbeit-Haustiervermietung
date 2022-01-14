@@ -40,18 +40,6 @@ initializePassport(
     id => users.find(user => user.id === id)
 )
 
-/*Hier mit DB Connection ersetzen
-const users = []
-        users.push({
-            id: Date.now().toString(),
-            lastname: req.body.lastname,
-            firstname: req.body.firstname,
-            email: req.body.email,
-            birthdate: req.body.birthdate,
-            password: hashedPassword
-        })*/
-
-
 //Welche Dateien für die Ansicht verwendet werden  -  Muss auf die html Datei umgeschrieben werden 
 app.set('view-engine', 'ejs')
 
@@ -87,7 +75,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('Login/login.ejs')
 })
 
-app.post('/login', passport.authenticate('local', {
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
@@ -97,7 +85,8 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('Login/register.ejs')
 })
 
-app.post('/register', async (req, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res) => {
+    
     //Password wird nun gehashed und in der Datenbank gespeichert, Zusätzlich wird der erstellte User in ein 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -110,7 +99,7 @@ app.post('/register', async (req, res) => {
     } catch {
         res.redirect('/register')
     }
-    //console.log(users)
+    
 })
 
 // Tiere
@@ -119,33 +108,57 @@ app.get('/tiere', (req, res) => {
 })
 
 app.get('/tiere/hamster', (req, res) => {
-    res.render('Tiere/hamster.ejs')
+
+    tiere.length = 0
+    client.query("Select * from tiere where tierart = 'Hamster'")
+        .then(result => result.rows.forEach(element => tiere.push(element)))
+
+        .then(() => res.render('Tiere/hamster.ejs', { tiere }))
 })
 
 app.get('/tiere/hund', (req, res) => {
 
     tiere.length = 0
-    client.query("Select * from tiere")
+    client.query("Select * from tiere where tierart = 'Hund'")
         .then(result => result.rows.forEach(element => tiere.push(element)))
-        .then(() => (console.table(tiere)))
 
         .then(() => res.render('Tiere/hund.ejs', { tiere }))
 })
 
 app.get('/tiere/katze', (req, res) => {
-    res.render('Tiere/katze.ejs')
+
+    tiere.length = 0
+    client.query("Select * from tiere where tierart = 'Katze'")
+        .then(result => result.rows.forEach(element => tiere.push(element)))
+
+        .then(() => res.render('Tiere/katze.ejs', { tiere }))
 })
 
 app.get('/tiere/schildkroete', (req, res) => {
-    res.render('Tiere/schildkroete.ejs')
+
+    tiere.length = 0
+    client.query("Select * from tiere where tierart = 'Schildkröte'")
+        .then(result => result.rows.forEach(element => tiere.push(element)))
+
+        .then(() => res.render('Tiere/schildkroete.ejs', { tiere }))
 })
 
 app.get('/tiere/sonstige', (req, res) => {
-    res.render('Tiere/sonstige.ejs')
+
+    tiere.length = 0
+    client.query("Select * from tiere where tierart = ''")
+        .then(result => result.rows.forEach(element => tiere.push(element)))
+
+        .then(() => res.render('Tiere/sonstige.ejs', { tiere }))
 })
 
 app.get('/tiere/vogel', (req, res) => {
-    res.render('Tiere/vogel.ejs')
+
+    tiere.length = 0
+    client.query("Select * from tiere where tierart = 'vogel'")
+        .then(result => result.rows.forEach(element => tiere.push(element)))
+
+        .then(() => res.render('Tiere/vogel.ejs', { tiere }))
 })
 
 //Tierheim
