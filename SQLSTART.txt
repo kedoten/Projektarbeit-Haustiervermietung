@@ -30,3 +30,7 @@
 	            ('Frodo' , 'Katze' , 'Russisch Blau' , 4 , 2 ),
 	            ('Elly' , 'Hund' , 'Yorkshire Terrier' , 8 , 4 ),
 	            ('Franz' , 'Katze' , 'Perser' , 9 , 2 );
+
+Ticket:
+
+create table ticket (ttid serial Primary Key, ttart varchar (255) , kname varchar(255), kemail varchar(255), kselect varchar(255), kadresse varchar (255), ktext text , id int , Foreign Key (id) references users(id) )

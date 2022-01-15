@@ -29,12 +29,12 @@
                     <a href="/tiere">Tiere</a>
                     <div class="uk-navbar-dropdown">
                         <ul class="uk-nav uk-navbar-dropdown-nav ">
-                            <li><a href="../tiere/hund">Hunde</a></li>
-                            <li><a href="../tiere/katze">Katzen</a></li>
-                            <li><a href="../tiere/hamster">Hamster</a></li>
-                            <li><a href="../tiere/vogel">Vögel</a></li>
-                            <li><a href="../tiere/schildkroete">Schildkröten</a></li>
-                            <li><a href="../tiere/sonstige">Sonstiges</a></li>
+                            <li><a href="tiere/hund">Hunde</a></li>
+                            <li><a href="tiere/katze">Katzen</a></li>
+                            <li><a href="tiere/hamster">Hamster</a></li>
+                            <li><a href="tiere/vogel">Vögel</a></li>
+                            <li><a href="tiere/schildkroete">Schildkröten</a></li>
+                            <li><a href="tiere/sonstige">Sonstiges</a></li>
                         </ul>
                     </div>
                 </li>
@@ -62,33 +62,45 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <form action="/tierheim/kontakt" method="post">
-            <fieldset class="uk-fieldset" style="width: 500px;">
-        
-                <legend class="uk-legend" id="ttart">Kontaktformular</legend>
-        
-                <div class="uk-margin">
-                    <input class="uk-input" type="text" id="kname" placeholder="Name">
-                </div>
+        <form action="/addTiere" method="post">
 
-                <div class="uk-margin">
-                    <input class="uk-input" type="text" id="kemail" placeholder="E-Mail">
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon=""></span>
+                    <input class="uk-input" type="text" id="tname" name="tname" placeholder="Name">
                 </div>
-        
-                <div class="uk-margin">
-                    <select class="uk-select" id="select">
-                        <option>Kontaktgrund</option>
-                        <option>Problem</option>
-                    </select>
-                </div>
-        
-                <div class="uk-margin">
-                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ktext"></textarea>
-                </div>
-            </fieldset>
+            </div>
 
-            <button type="submit" class="uk-button uk-button-default">Formular absenden</button>
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon=""></span>
+                    <input class="uk-input" type="integer" id="talter" name="talter" placeholder="Alter">
+                </div>
+            </div>
 
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon=""></span>
+                    <input class="uk-input" type="text" id="tierart" name="tierart" placeholder="Tierart">
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon=""></span>
+                    <input class="uk-input" type="text" id="rasse" name="rasse" placeholder="Rasse">
+                </div>
+            </div>
+
+            <div class="uk-margin">
+                <div class="uk-inline">
+                    <span class="uk-form-icon" uk-icon=""></span>
+                    <input class="uk-input" type="text" id="thid" name="thid" placeholder="Tierheim-ID">
+                </div>
+            </div>
+
+            <button type="submit" class="uk-button uk-button-default">Registrierung abschließen!</button>
+        
         </form>
     </div>
 
