@@ -15,6 +15,10 @@ Home:
  
 SESSION_SECRET auf random string setzen zur sicherheit
 
+views:
+    - Ausloggen Button auf Position Login
+    - Visibility ändern
+
 
 
  
