@@ -73,23 +73,38 @@
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">    
 
-        <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
-            <% if (tiere.length > 0) {%>
-                <% tiere.forEach(tier => { %>
-            <div class="uk-width-1-5 uk-text-left uk-width-expand@m">
-                <div class="uk-card uk-card-default uk-card-body "> <img data-src="images/hamster.png" alt="" uk-img width="50px" height="50px">
-                    <br class="tid"> Kennung: <%= tier.tid %> 
-                    <br class="tname"> Name: <%= tier.tname %>
-                    <br class="talter"> Alter: <%= tier.talter %>
-                    <br class="rasse"> Rasse: <%= tier.rasse %>
-                </div>
-             </div>
-            <% }) %>
-            <% }else { %>
-                <p> Es gibt keine tiere</p>
-            <% } %> 
-        </div>
-</div>
+        <table class="uk-table uk-table-hover uk-table-divider">
+            <thead>
+                <tr>
+                    <th>Ticket ID</th>
+                    <th>Ticket Art</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Adresse</th>
+                    <th></th>
+                    <th>Ticket Inhalt</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (tickets.length > 0) {%>
+                    <% tickets.forEach(ticket => { %>
+                <tr>
+                    <td class="ttid"><%= ticket.ttid %> </td>
+                    <td class="ttart"><%= ticket.ttart %></td>
+                    <td class="kanme"><%= ticket.kname %></td>
+                    <td class="kemail"><%= ticket.kemail %></td>
+                    <td class="kadresse"><%= ticket.kadresse %></td>
+                    <td class="kselect"><%= ticket.kselect %></td>
+                    <td class="ktext"><%= ticket.ktext %></td>
+                    <td><button class="uk-button uk-button-default" type="button">Button</button></td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+        <% }else { %>
+            <p> Es gibt keine tickets</p>
+        <% } %>
+    </div>
 
     <!-- Footer -->
     <div style="width: 100%; height: 20vh;" class=" uk-background-secondary uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">

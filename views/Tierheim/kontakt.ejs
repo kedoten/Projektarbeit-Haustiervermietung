@@ -50,6 +50,16 @@
                 <li style="margin-left:50px">
                     <a href="/ueberUns">Über uns</a>
                 </li>
+                <li style="margin-left:50px">
+                    <a href="/adminsite">Admin Funktionen</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/addTiere">Tiere hinzufügen</a></li>
+                            <li><a href="/addTierheim">Tierheim hinzufügen</a></li>
+                            <li><a href="/tickets">Tickets</a></li>
+                        </ul>
+                    </div>
+                </li>
              </ul>
         </div>
 
@@ -65,25 +75,25 @@
         <form action="/tierheim/kontakt" method="post">
             <fieldset class="uk-fieldset" style="width: 500px;">
         
-                <legend class="uk-legend" id="ttart">Kontaktformular</legend>
+                <legend class="uk-legend" id="ttart" name="ttart" >Kontaktformular</legend>
         
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" id="kname" placeholder="Name">
+                    <input class="uk-input" type="text" id="kname" name="kname" placeholder="Name">
                 </div>
 
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" id="kemail" placeholder="E-Mail">
+                    <input class="uk-input" type="text" id="kemail" name="kemail" placeholder="E-Mail">
                 </div>
         
                 <div class="uk-margin">
-                    <select class="uk-select" id="select">
+                    <select class="uk-select" id="select" name="select">
                         <option>Kontaktgrund</option>
                         <option>Problem</option>
                     </select>
                 </div>
         
                 <div class="uk-margin">
-                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ktext"></textarea>
+                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ktext" name="ktext"></textarea>
                 </div>
             </fieldset>
 

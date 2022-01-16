@@ -50,6 +50,16 @@
                 <li style="margin-left:50px">
                     <a href="/ueberUns">Über uns</a>
                 </li>
+                <li style="margin-left:50px">
+                    <a href="/adminsite">Admin Funktionen</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/addTiere">Tiere hinzufügen</a></li>
+                            <li><a href="/addTierheim">Tierheim hinzufügen</a></li>
+                            <li><a href="/tickets">Tickets</a></li>
+                        </ul>
+                    </div>
+                </li>
              </ul>
         </div>
 
@@ -65,22 +75,22 @@
         <form action="/tierheim/partner_werden" method="post">
             <fieldset class="uk-fieldset" style="width: 500px;">
         
-                <legend class="uk-legend" id="ttart">Partner werden</legend>
+                <legend class="uk-legend">Partner werden</legend>
         
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" id="pname" placeholder="Name">
+                    <input class="uk-input" type="text" id="pname" name="pname" placeholder="Name">
                 </div>
 
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" id="pemail" placeholder="E-Mail">
+                    <input class="uk-input" type="text" id="pemail" name="pemail" placeholder="E-Mail">
                 </div>
         
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" id="padresse" placeholder="Adresse">
+                    <input class="uk-input" type="text" id="padresse" name="padresse" placeholder="Adresse">
                 </div>
         
                 <div class="uk-margin">
-                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ptext"></textarea>
+                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ptext" name="ptext"></textarea>
                 </div>
             </fieldset>
 
