@@ -72,7 +72,6 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">    
-
         <table class="uk-table uk-table-hover uk-table-divider">
             <thead>
                 <tr>
@@ -83,20 +82,21 @@
                     <th>Adresse</th>
                     <th></th>
                     <th>Ticket Inhalt</th>
+                    <th>User ID</th>
                 </tr>
             </thead>
             <tbody>
                 <% if (tickets.length > 0) {%>
                     <% tickets.forEach(ticket => { %>
                 <tr>
-                    <td class="ttid"><%= ticket.ttid %> </td>
+                    <td class="ttid" id="dttid"><%= ticket.ttid %> </td>
                     <td class="ttart"><%= ticket.ttart %></td>
                     <td class="kanme"><%= ticket.kname %></td>
                     <td class="kemail"><%= ticket.kemail %></td>
                     <td class="kadresse"><%= ticket.kadresse %></td>
                     <td class="kselect"><%= ticket.kselect %></td>
                     <td class="ktext"><%= ticket.ktext %></td>
-                    <td><button class="uk-button uk-button-default" type="button">Button</button></td>
+                    <td class="id"><%= ticket.id %></td>
                 </tr>
                 <% }) %>
             </tbody>

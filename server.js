@@ -172,11 +172,11 @@ app.get('/tierheim', (req, res) => {
     .then( () => res.render('Tierheim/tierheime.ejs', { tierheime } ))
 })
 
-app.get('/tierheim/kontakt', (req, res) => {
+app.get('/tierheim/kontakt', checkAuthenticated, (req, res) => {
     res.render('Tierheim/kontakt.ejs')
 })
 
-app.post('/tierheim/kontakt', (req, res) => {
+app.post('/tierheim/kontakt', checkAuthenticated, (req, res) => {
     
    
     try {
@@ -192,15 +192,15 @@ app.post('/tierheim/kontakt', (req, res) => {
     
 })
 
-app.get('/tierheim/partner_werden', (req, res) => {
+app.get('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
     res.render('Tierheim/partner_werden.ejs')
 })
-app.post('/tierheim/partner_werden', (req, res) => {
+app.post('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
     
    
     try {
-        client.query("insert into ticket (ttart, kname, kemail, kadresse, ktext) values($1, $2, $3, $4, $5)",
-            ["Partnerformular" , req.body.pname, req.body.pemail, req.body.padresse, req.body.ptext])
+        client.query("insert into ticket (ttart, kname, kemail, kadresse, ktext) values($1, $2, $3, $4, $5, $6)",
+            ["Partnerformular" , req.body.pname, req.body.pemail, req.body.padresse, req.body.ptext, req.user.id])
             .then(() => tickets.length = 0)
             .then(() => client.query("Select * from ticket"))
             .then(result => result.rows.forEach(element => tickets.push(element)))
@@ -245,7 +245,7 @@ app.post('/addTierheim', checkAdmin, (req, res) => {
    
     try {
         client.query("insert into tierheim (thname, thadresse) values($1, $2)",
-            [req.body.thname, req.body.thadresse,])
+            [req.body.thname, req.body.thadresse])
             .then(() => tierheime.length = 0)
             .then(() => client.query("Select * from tierheim"))
             .then(result => result.rows.forEach(element => tierheime.push(element)))
@@ -264,7 +264,6 @@ app.get('/tickets', checkAdmin,(req, res) => {
 
     .then( () => res.render('Admin/ticket.ejs', { tickets } ))
 })
-
 
 
 //Logout
