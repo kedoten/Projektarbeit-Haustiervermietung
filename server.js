@@ -256,7 +256,7 @@ app.post('/addTierheim', checkAdmin, (req, res) => {
     
 })
 
-app.get('/tickets', (req, res) => {
+app.get('/tickets', checkAdmin,(req, res) => {
 
     tickets.length = 0
     client.query("Select * from ticket")
