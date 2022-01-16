@@ -11,6 +11,8 @@ const client = new Client({
 
 const users = []
 const tiere = []
+const tickets= []
+const tierheime = []
 
 //Databasen connecten + User Ausgeben für Login 
 client.connect()
@@ -56,7 +58,6 @@ app.use(methodOverride('_method'))
 
 //Bilder
 app.use(express.static("public"))
-
 
 /*  app.get     ->  Seite durch entsprechende URL aurufbar -> Welche Datei für die Ansicht benutzt wird
 *   app.post    ->  Funktion ausführen
@@ -163,20 +164,105 @@ app.get('/tiere/vogel', (req, res) => {
 
 //Tierheim
 app.get('/tierheim', (req, res) => {
-    res.render('Tierheim/tierheime.ejs')
+
+    tierheime.length = 0
+    client.query("Select * from tierheim")
+        .then(result => result.rows.forEach(element => tierheime.push(element)))
+
+    .then( () => res.render('Tierheim/tierheime.ejs', { tierheime } ))
 })
 
 app.get('/tierheim/kontakt', (req, res) => {
     res.render('Tierheim/kontakt.ejs')
 })
 
+app.post('/tierheim/kontakt', (req, res) => {
+    
+   
+    try {
+        client.query("insert into ticket(ttart, kname, kemail , kselect, ktext, id) values($1, $2, $3, $4, $5, $6)",
+            ["Kontaktformular" , req.body.kname, req.body.kemail, req.body.select, req.body.ktext, req.user.id])
+            .then(() => tickets.length = 0)
+            .then(() => client.query("Select * from ticket"))
+            .then(result => result.rows.forEach(element => tickets.push(element)))
+        res.redirect('/tierheim/kontakt')
+    } catch {
+        res.redirect('/')
+    }
+    
+})
+
 app.get('/tierheim/partner_werden', (req, res) => {
     res.render('Tierheim/partner_werden.ejs')
 })
-
+app.post('/tierheim/partner_werden', (req, res) => {
+    
+   
+    try {
+        client.query("insert into ticket (ttart, kname, kemail, kadresse, ktext) values($1, $2, $3, $4, $5)",
+            ["Partnerformular" , req.body.pname, req.body.pemail, req.body.padresse, req.body.ptext])
+            .then(() => tickets.length = 0)
+            .then(() => client.query("Select * from ticket"))
+            .then(result => result.rows.forEach(element => tickets.push(element)))
+        res.redirect('/tierheim/partner_werden')
+    } catch {
+        res.redirect('/')
+    }
+    
+})
 //Über uns
 app.get('/ueberUns', (req, res) => {
     res.render('UeberUns/ueberUns.ejs')
+})
+
+//Adminseite
+app.get('/addTiere', checkAdmin, (req, res) => {
+    res.render('Admin/addTiere.ejs')
+})
+
+app.post('/addTiere', checkAdmin, (req, res) => {
+    
+   
+    try {
+        client.query("insert into tiere (tname, tierart, rasse, talter , thid) values($1, $2, $3, $4, $5)",
+            [req.body.tname, req.body.tierart, req.body.rasse, req.body.talter, thid])
+            .then(() => tiere.length = 0)
+            .then(() => client.query("Select * from tiere"))
+            .then(result => result.rows.forEach(element => tiere.push(element)))
+        res.redirect('/addTiere')
+    } catch {
+        res.redirect('/')
+    }
+    
+})
+
+app.get('/addTierheim', checkAdmin, (req, res) => {
+    res.render('Admin/addTierheim.ejs')
+})
+
+app.post('/addTierheim', checkAdmin, (req, res) => {
+    
+   
+    try {
+        client.query("insert into tierheim (thname, thadresse) values($1, $2)",
+            [req.body.thname, req.body.thadresse,])
+            .then(() => tierheime.length = 0)
+            .then(() => client.query("Select * from tierheim"))
+            .then(result => result.rows.forEach(element => tierheime.push(element)))
+        res.redirect('/addTierheim')
+    } catch {
+        res.redirect('/')
+    }
+    
+})
+
+app.get('/tickets', (req, res) => {
+
+    tickets.length = 0
+    client.query("Select * from ticket")
+        .then(result => result.rows.forEach(element => tickets.push(element)))
+
+    .then( () => res.render('Admin/ticket.ejs', { tickets } ))
 })
 
 
@@ -212,10 +298,18 @@ function checkAdmin(req, res, next) {
      if (req.isAuthenticated() && req.user.id == 1) {
           return next() 
         } 
-        
+
         res.redirect('/') 
     }
 
+//Visibility für ein logged in user (document geht nicht, da es nur für dynamisch geht, wir rufen lediglich statisch die Seiten auf) 
+function logVisibility(req, res, next) {
+    if (req.user) {
+        document.getElementById("blogin").style.visibility = "hidden"
+    } else {
+        document.getElementById("blogout").style.visibility = "hidden"    
+    }
+}
 
 
 //Website über (Powershell): npm run devStart       (URL): localhost:3000       erreichbar
