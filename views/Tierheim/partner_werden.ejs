@@ -50,6 +50,16 @@
                 <li style="margin-left:50px">
                     <a href="/ueberUns">Über uns</a>
                 </li>
+                <li style="margin-left:50px">
+                    <a href="/adminsite">Admin Funktionen</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/addTiere">Tiere hinzufügen</a></li>
+                            <li><a href="/addTierheim">Tierheim hinzufügen</a></li>
+                            <li><a href="/tickets">Tickets</a></li>
+                        </ul>
+                    </div>
+                </li>
              </ul>
         </div>
 
@@ -62,7 +72,31 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <h1>Partner werden</h1>
+        <form action="/tierheim/partner_werden" method="post">
+            <fieldset class="uk-fieldset" style="width: 500px;">
+        
+                <legend class="uk-legend">Partner werden</legend>
+        
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" id="pname" name="pname" placeholder="Name">
+                </div>
+
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" id="pemail" name="pemail" placeholder="E-Mail">
+                </div>
+        
+                <div class="uk-margin">
+                    <input class="uk-input" type="text" id="padresse" name="padresse" placeholder="Adresse">
+                </div>
+        
+                <div class="uk-margin">
+                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ptext" name="ptext"></textarea>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="uk-button uk-button-default">Formular absenden</button>
+
+        </form>
     </div>
 
     <!-- Footer -->

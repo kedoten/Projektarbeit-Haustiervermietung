@@ -50,6 +50,16 @@
                 <li style="margin-left:50px">
                     <a href="/ueberUns">Über uns</a>
                 </li>
+                <li style="margin-left:50px">
+                    <a href="/adminsite">Admin Funktionen</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li><a href="/addTiere">Tiere hinzufügen</a></li>
+                            <li><a href="/addTierheim">Tierheim hinzufügen</a></li>
+                            <li><a href="/tickets">Tickets</a></li>
+                        </ul>
+                    </div>
+                </li>
              </ul>
         </div>
 
@@ -62,30 +72,33 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <form>
+        <form action="/tierheim/kontakt" method="post">
             <fieldset class="uk-fieldset" style="width: 500px;">
         
-                <legend class="uk-legend">Kontaktformular</legend>
+                <legend class="uk-legend" id="ttart" name="ttart" >Kontaktformular</legend>
         
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" placeholder="Name">
+                    <input class="uk-input" type="text" id="kname" name="kname" placeholder="Name">
                 </div>
 
                 <div class="uk-margin">
-                    <input class="uk-input" type="text" placeholder="E-Mail">
+                    <input class="uk-input" type="text" id="kemail" name="kemail" placeholder="E-Mail">
                 </div>
         
                 <div class="uk-margin">
-                    <select class="uk-select">
+                    <select class="uk-select" id="select" name="select">
                         <option>Kontaktgrund</option>
-                        <option>Porblem</option>
+                        <option>Problem</option>
                     </select>
                 </div>
         
                 <div class="uk-margin">
-                    <textarea class="uk-textarea" rows="7" placeholder="Text"></textarea>
+                    <textarea class="uk-textarea" rows="7" placeholder="Text" id="ktext" name="ktext"></textarea>
                 </div>
             </fieldset>
+
+            <button type="submit" class="uk-button uk-button-default">Formular absenden</button>
+
         </form>
     </div>
 

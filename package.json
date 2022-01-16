@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js"
+    "devStart": "nodemon server.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -27,9 +28,9 @@
     "passport-local": "^1.0.0",
     "pg": "^8.7.1"
   },
-  "description": "",
   "devDependencies": {
     "dotenv": "^10.0.0",
     "nodemon": "^2.0.15"
-  }
+  },
+  "description": ""
 }
