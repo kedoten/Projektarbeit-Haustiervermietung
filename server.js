@@ -9,11 +9,6 @@ const client = new Client({
     database: "Haustiervermietung"
 })
 
-const users = []
-const tiere = []
-const tickets= []
-const tierheime = []
-var isadmin = false
 
 //Databasen connecten + User Ausgeben für Login 
 client.connect()
@@ -22,11 +17,18 @@ client.connect()
     .then(result => result.rows.forEach(element => users.push(element)))
     .catch(e => console.log(e))
 
-
+//Production Mode über die .env Datei 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
 }
 
+//arrays
+const users = []
+const tiere = []
+const tickets = []
+const tierheime = []
+
+//Konstante und Methoden aus anderen Dateien
 const express = require('express')
 const app = express()
 const bcrypt = require('bcrypt')
@@ -88,7 +90,7 @@ app.get('/register', checkNotAuthenticated,(req, res) => {
 })
 
 app.post('/register', checkNotAuthenticated, async (req, res) => {
-    
+
     //Password wird nun gehashed und in der Datenbank gespeichert, Zusätzlich wird der erstellte User in ein 
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
@@ -101,7 +103,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
     } catch {
         res.redirect('/register')
     }
-    
+
 })
 
 // Tiere
@@ -170,7 +172,7 @@ app.get('/tierheim',(req, res) => {
     client.query("Select * from tierheim")
         .then(result => result.rows.forEach(element => tierheime.push(element)))
 
-    .then( () => res.render('Tierheim/tierheime.ejs', { tierheime,} ))
+    .then( () => res.render('Tierheim/tierheime.ejs', { tierheime } ))
 })
 
 app.get('/tierheim/kontakt', checkAuthenticated,(req, res) => {
@@ -178,11 +180,11 @@ app.get('/tierheim/kontakt', checkAuthenticated,(req, res) => {
 })
 
 app.post('/tierheim/kontakt', checkAuthenticated, (req, res) => {
-    
-   
+
+
     try {
         client.query("insert into ticket(ttart, kname, kemail , kselect, ktext, id) values($1, $2, $3, $4, $5, $6)",
-            ["Kontaktformular" , req.body.kname, req.body.kemail, req.body.select, req.body.ktext, req.user.id])
+            ["Kontaktformular", req.body.kname, req.body.kemail, req.body.select, req.body.ktext, req.user.id])
             .then(() => tickets.length = 0)
             .then(() => client.query("Select * from ticket"))
             .then(result => result.rows.forEach(element => tickets.push(element)))
@@ -190,18 +192,18 @@ app.post('/tierheim/kontakt', checkAuthenticated, (req, res) => {
     } catch {
         res.redirect('/')
     }
-    
+
 })
 
 app.get('/tierheim/partner_werden', checkAuthenticated,(req, res) => {
     res.render('Tierheim/partner_werden.ejs', {tierheime})
 })
 app.post('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
-    
-   
+
+
     try {
         client.query("insert into ticket (ttart, kname, kemail, kadresse, ktext) values($1, $2, $3, $4, $5, $6)",
-            ["Partnerformular" , req.body.pname, req.body.pemail, req.body.padresse, req.body.ptext, req.user.id])
+            ["Partnerformular", req.body.pname, req.body.pemail, req.body.padresse, req.body.ptext, req.user.id])
             .then(() => tickets.length = 0)
             .then(() => client.query("Select * from ticket"))
             .then(result => result.rows.forEach(element => tickets.push(element)))
@@ -209,21 +211,21 @@ app.post('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
     } catch {
         res.redirect('/')
     }
-    
+
 })
 //Über uns
 app.get('/ueberUns',(req, res) => {
     res.render('UeberUns/ueberUns.ejs', {tierheime})
 })
 
-//Adminseite
-app.get('/addTiere', checkAdmin,(req, res) => {
-    res.render('Admin/addTiere.ejs',{tierheime})
+//Adminseiten
+
+app.get('/addTiere', checkAdmin, (req, res) => {
+    res.render('Admin/addTiere.ejs')
 })
 
 app.post('/addTiere', checkAdmin, (req, res) => {
-    
-   
+
     try {
         client.query("insert into tiere (tname, tierart, rasse, talter , thid) values($1, $2, $3, $4, $5)",
             [req.body.tname, req.body.tierart, req.body.rasse, req.body.talter, thid])
@@ -234,7 +236,7 @@ app.post('/addTiere', checkAdmin, (req, res) => {
     } catch {
         res.redirect('/')
     }
-    
+
 })
 
 app.get('/addTierheim', checkAdmin,(req, res) => {
@@ -242,8 +244,7 @@ app.get('/addTierheim', checkAdmin,(req, res) => {
 })
 
 app.post('/addTierheim', checkAdmin, (req, res) => {
-    
-   
+
     try {
         client.query("insert into tierheim (thname, thadresse) values($1, $2)",
             [req.body.thname, req.body.thadresse])
@@ -254,16 +255,16 @@ app.post('/addTierheim', checkAdmin, (req, res) => {
     } catch {
         res.redirect('/')
     }
-    
+
 })
 
-app.get('/tickets', checkAdmin,(req, res) => {
+app.get('/tickets', checkAdmin, (req, res) => {
 
     tickets.length = 0
     client.query("Select * from ticket")
         .then(result => result.rows.forEach(element => tickets.push(element)))
 
-    .then( () => res.render('Admin/ticket.ejs', { tickets} ))
+        .then(() => res.render('Admin/ticket.ejs', { tickets }))
 })
 
 
@@ -297,7 +298,6 @@ function checkNotAuthenticated(req, res, next) {
 //wenn man kein Admin ist wird man zur Start Seite weitergeleitet
 function checkAdmin(req, res, next) {
     if (req.isAuthenticated() && req.user.id == 1) {
-        req.session.passport.isadmin = true
         return next() 
     } 
 
@@ -312,7 +312,3 @@ function logAdmin(req, res, next) {
     }
     next()
 }
-
-
-//Website über (Powershell): npm run devStart       (URL): localhost:3000       erreichbar
-app.listen(3000)
