@@ -22,27 +22,27 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
-        <h1>Bisher unterstützen wir 4 Tierheime und vermitteln deren Tiere</h1>
+        <h1>Bisher haben sich bereits vier Tierheime unserer Idee angeschlossen</h1>
+
+        <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+            <% if (tierheime.length > 0) {%>
+                <% tierheime.forEach(tierheim => { %>
+            <div class="uk-width-1-5 uk-text-left uk-width-expand@m">
+                <div class="uk-card uk-card-default uk-card-body thid">
+                    <br class="thname"> Name: <%= tierheim.thname %>
+                    <br class="thadresse"> Adresse: <%= tierheim.thadresse %>
+                </div>
+            </div>
+            <% }) %>
+            <% }else { %>
+                <p> Es gibt keine tiere</p>
+            <% } %> 
+        </div>
     </div>
 
     <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
         <h1>Die Tierheime finden Sie an folgenden Standorten:</h1>
-        <iframe src="https://www.google.com/maps/d/embed?mid=1AlzOOHtcXZVFR6JdU_Hv8gL6hsItrRrc&ehbc=2E312F" width="1000" height="600"></iframe>
-    </div>
-
-    <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
-        <% if (tierheime.length > 0) {%>
-            <% tierheime.forEach(tierheim => { %>
-        <div class="uk-width-1-5 uk-text-left uk-width-expand@m">
-            <div class="uk-card uk-card-default uk-card-body thid"> Kennung: <%= tierheim.thid %>
-                <br class="thname"> Name: <%= tierheim.thname %>
-                <br class="thadresse"> Alter: <%= tierheim.thadresse %>
-            </div>
-         </div>
-        <% }) %>
-        <% }else { %>
-            <p> Es gibt keine tiere</p>
-        <% } %> 
+        <iframe src="https://www.google.com/maps/d/embed?mid=1AlzOOHtcXZVFR6JdU_Hv8gL6hsItrRrc&ehbc=2E312F" width="100%" height="600"></iframe>
     </div>
 
     <!-- Footer -->
