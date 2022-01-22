@@ -13,6 +13,7 @@ const users = []
 const tiere = []
 const tickets= []
 const tierheime = []
+var isadmin = false
 
 //Databasen connecten + User Ausgeben für Login 
 client.connect()
@@ -67,12 +68,12 @@ app.use(express.static("public"))
 */
 
 // index
-app.get('/', (req, res) => {
-    res.render('index.ejs')
+app.get('/',logAdmin,(req, res) => {
+    res.render('index.ejs',{isadmin})
 })
 
 // Login
-app.get('/login', checkNotAuthenticated, (req, res) => {
+app.get('/login', checkNotAuthenticated,(req, res) => {
     res.render('Login/login.ejs')
 })
 
@@ -82,7 +83,7 @@ app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     failureFlash: true
 }))
 
-app.get('/register', checkNotAuthenticated, (req, res) => {
+app.get('/register', checkNotAuthenticated,(req, res) => {
     res.render('Login/register.ejs')
 })
 
@@ -104,76 +105,76 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
 })
 
 // Tiere
-app.get('/tiere', (req, res) => {
+app.get('/tiere',(req, res) => {
     res.render('Tiere/tiere.ejs')
 })
 
-app.get('/tiere/hamster', (req, res) => {
+app.get('/tiere/hamster',(req, res) => {
 
     tiere.length = 0
     client.query("Select * from tiere where tierart = 'Hamster'")
         .then(result => result.rows.forEach(element => tiere.push(element)))
 
-        .then(() => res.render('Tiere/hamster.ejs', { tiere }))
+        .then(() => res.render('Tiere/hamster.ejs', { tiere}))
 })
 
-app.get('/tiere/hund', (req, res) => {
+app.get('/tiere/hund',(req, res) => {
 
     tiere.length = 0
     client.query("Select * from tiere where tierart = 'Hund'")
         .then(result => result.rows.forEach(element => tiere.push(element)))
 
-        .then(() => res.render('Tiere/hund.ejs', { tiere }))
+        .then(() => res.render('Tiere/hund.ejs', { tiere}))
 })
 
-app.get('/tiere/katze', (req, res) => {
+app.get('/tiere/katze',(req, res) => {
 
     tiere.length = 0
     client.query("Select * from tiere where tierart = 'Katze'")
         .then(result => result.rows.forEach(element => tiere.push(element)))
 
-        .then(() => res.render('Tiere/katze.ejs', { tiere }))
+        .then(() => res.render('Tiere/katze.ejs', { tiere}))
 })
 
-app.get('/tiere/schildkroete', (req, res) => {
+app.get('/tiere/schildkroete',(req, res) => {
 
     tiere.length = 0
     client.query("Select * from tiere where tierart = 'Schildkröte'")
         .then(result => result.rows.forEach(element => tiere.push(element)))
 
-        .then(() => res.render('Tiere/schildkroete.ejs', { tiere }))
+        .then(() => res.render('Tiere/schildkroete.ejs', { tiere}))
 })
 
-app.get('/tiere/sonstige', (req, res) => {
+app.get('/tiere/sonstige',(req, res) => {
 
     tiere.length = 0
     client.query("Select * from tiere where tierart = ''")
         .then(result => result.rows.forEach(element => tiere.push(element)))
 
-        .then(() => res.render('Tiere/sonstige.ejs', { tiere }))
+        .then(() => res.render('Tiere/sonstige.ejs', { tiere}))
 })
 
-app.get('/tiere/vogel', (req, res) => {
+app.get('/tiere/vogel',(req, res) => {
 
     tiere.length = 0
     client.query("Select * from tiere where tierart = 'vogel'")
         .then(result => result.rows.forEach(element => tiere.push(element)))
 
-        .then(() => res.render('Tiere/vogel.ejs', { tiere }))
+        .then(() => res.render('Tiere/vogel.ejs', { tiere}))
 })
 
 //Tierheim
-app.get('/tierheim', (req, res) => {
+app.get('/tierheim',(req, res) => {
 
     tierheime.length = 0
     client.query("Select * from tierheim")
         .then(result => result.rows.forEach(element => tierheime.push(element)))
 
-    .then( () => res.render('Tierheim/tierheime.ejs', { tierheime } ))
+    .then( () => res.render('Tierheim/tierheime.ejs', { tierheime,} ))
 })
 
-app.get('/tierheim/kontakt', checkAuthenticated, (req, res) => {
-    res.render('Tierheim/kontakt.ejs')
+app.get('/tierheim/kontakt', checkAuthenticated,(req, res) => {
+    res.render('Tierheim/kontakt.ejs', { tierheime, isauthenticated: req.session.passport.isauthenticated})
 })
 
 app.post('/tierheim/kontakt', checkAuthenticated, (req, res) => {
@@ -192,8 +193,8 @@ app.post('/tierheim/kontakt', checkAuthenticated, (req, res) => {
     
 })
 
-app.get('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
-    res.render('Tierheim/partner_werden.ejs')
+app.get('/tierheim/partner_werden', checkAuthenticated,(req, res) => {
+    res.render('Tierheim/partner_werden.ejs', {tierheime})
 })
 app.post('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
     
@@ -211,13 +212,13 @@ app.post('/tierheim/partner_werden', checkAuthenticated, (req, res) => {
     
 })
 //Über uns
-app.get('/ueberUns', (req, res) => {
-    res.render('UeberUns/ueberUns.ejs')
+app.get('/ueberUns',(req, res) => {
+    res.render('UeberUns/ueberUns.ejs', {tierheime})
 })
 
 //Adminseite
-app.get('/addTiere', checkAdmin, (req, res) => {
-    res.render('Admin/addTiere.ejs')
+app.get('/addTiere', checkAdmin,(req, res) => {
+    res.render('Admin/addTiere.ejs',{tierheime})
 })
 
 app.post('/addTiere', checkAdmin, (req, res) => {
@@ -236,8 +237,8 @@ app.post('/addTiere', checkAdmin, (req, res) => {
     
 })
 
-app.get('/addTierheim', checkAdmin, (req, res) => {
-    res.render('Admin/addTierheim.ejs')
+app.get('/addTierheim', checkAdmin,(req, res) => {
+    res.render('Admin/addTierheim.ejs',{tierheime})
 })
 
 app.post('/addTierheim', checkAdmin, (req, res) => {
@@ -262,7 +263,7 @@ app.get('/tickets', checkAdmin,(req, res) => {
     client.query("Select * from ticket")
         .then(result => result.rows.forEach(element => tickets.push(element)))
 
-    .then( () => res.render('Admin/ticket.ejs', { tickets } ))
+    .then( () => res.render('Admin/ticket.ejs', { tickets} ))
 })
 
 
@@ -276,9 +277,10 @@ app.delete('/logout', (req, res) => {
 //wenn man nicht eingeloggt ist wird man zum login weitergeleitet 
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
+        req.session.passport.isauthenticated = true
         return next()
     }
-
+    
     res.redirect('/login')
 }
 
@@ -294,20 +296,21 @@ function checkNotAuthenticated(req, res, next) {
 
 //wenn man kein Admin ist wird man zur Start Seite weitergeleitet
 function checkAdmin(req, res, next) {
-     if (req.isAuthenticated() && req.user.id == 1) {
-          return next() 
-        } 
+    if (req.isAuthenticated() && req.user.id == 1) {
+        req.session.passport.isadmin = true
+        return next() 
+    } 
 
-        res.redirect('/') 
-    }
+    res.redirect('/') 
+}
 
-//Visibility für ein logged in user (document geht nicht, da es nur für dynamisch geht, wir rufen lediglich statisch die Seiten auf) 
-function logVisibility(req, res, next) {
-    if (req.user) {
-        document.getElementById("blogin").style.visibility = "hidden"
-    } else {
-        document.getElementById("blogout").style.visibility = "hidden"    
+//wenn man kein Admin ist wird man zur Start Seite weitergeleitet
+function logAdmin(req, res, next) {
+    if (!req.isAuthenticated()){
+        isadmin = true
+        return next() 
     }
+    next()
 }
 
 
