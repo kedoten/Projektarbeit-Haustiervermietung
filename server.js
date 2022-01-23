@@ -70,8 +70,8 @@ app.use(express.static("public"))
 */
 
 // index
-app.get('/',logAdmin,(req, res) => {
-    res.render('index.ejs',{isadmin})
+app.get('/',(req, res) => {
+    res.render('index.ejs')
 })
 
 // Login
@@ -303,16 +303,5 @@ function checkAdmin(req, res, next) {
 
     res.redirect('/') 
 }
-
-//wenn man kein Admin ist wird man zur Start Seite weitergeleitet
-function logAdmin(req, res, next) {
-    if (!req.isAuthenticated()){
-        isadmin = true
-        return next() 
-    }
-    next()
-}
-
-
 
 app.listen(3000)
