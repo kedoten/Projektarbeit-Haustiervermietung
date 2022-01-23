@@ -20,9 +20,12 @@
     <!-- Navigation oben -->
     <%- include("../partials/navbar.ejs") %>
 
-    <!-- 1 Text-Teil -->
-    <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+    <div style="width: 100%; height: 50vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
         <h1>Bisher haben sich bereits vier Tierheime unserer Idee angeschlossen</h1>
+    </div>
+    
+    <!-- 1 Text-Teil -->
+    <div style="width: 100%; height: 10vh; margin-top: -5%;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
 
         <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
             <% if (tierheime.length > 0) {%>
@@ -40,8 +43,11 @@
         </div>
     </div>
 
-    <div style="width: 100%; height: 80vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
+    <div style="width: 100%; height: 30vh;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
         <h1>Die Tierheime finden Sie an folgenden Standorten:</h1>
+    </div>
+
+    <div style="width: 100%; height: 80vh; margin-top: -5%;" class=" uk-background-none uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">
         <iframe src="https://www.google.com/maps/d/embed?mid=1AlzOOHtcXZVFR6JdU_Hv8gL6hsItrRrc&ehbc=2E312F" width="100%" height="600"></iframe>
     </div>
 
