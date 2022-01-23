@@ -22,6 +22,7 @@
 
     <!-- 1 Text-Teil -->
     <div style="width: 100%; height: 100vh;" class=" uk-background-muted uk-height-1-1 uk-card uk-card-default uk-card-body uk-flex uk-flex-center uk-flex-middle">    
+        <% if (tickets.length > 0) {%>
         <table class="uk-table uk-table-hover uk-table-divider">
             <thead>
                 <tr>
@@ -36,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <% if (tickets.length > 0) {%>
+                
                     <% tickets.forEach(ticket => { %>
                 <tr>
                     <td class="ttid" id="dttid"><%= ticket.ttid %> </td>
